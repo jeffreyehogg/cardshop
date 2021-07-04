@@ -1,4 +1,4 @@
-const products = [
+export const products = [
   {
     _id: '1',
     name: 'Barry Bonds RC',
@@ -77,6 +77,4 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
-];
-
-export default products;
+]

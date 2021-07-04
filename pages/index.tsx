@@ -1,10 +1,11 @@
-import { Row, Col } from 'react-bootstrap';
-import Layout from '../components/Layout';
-import Product from '../components/Product';
+import { useState, useEffect } from 'react'
+import { Row, Col } from 'react-bootstrap'
+import Layout from '../components/Layout'
+import Product from '../components/Product'
 
-import products from './api/products';
+export default function Home({ data }) {
+  const [products, setProducts] = useState(data)
 
-export default function Home() {
   return (
     <Layout title="CardShop">
       <h1>Latest Cards</h1>
@@ -16,5 +17,15 @@ export default function Home() {
         ))}
       </Row>
     </Layout>
-  );
+  )
+}
+
+export async function getStaticProps() {
+  const res = await fetch(`http://localhost:3000/api/products`)
+  const data = await res.json()
+  return {
+    props: {
+      data,
+    }, // will be passed to the page component as props
+  }
 }
