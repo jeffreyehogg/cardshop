@@ -7,10 +7,10 @@ export default function Home({ data }) {
   const [products, setProducts] = useState(data)
 
   return (
-    <Layout title="CardShop">
+    <Layout title='CardShop'>
       <h1>Latest Cards</h1>
       <Row>
-        {products.map(product => (
+        {products.map((product) => (
           <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
             <Product product={product} />
           </Col>
@@ -26,6 +26,6 @@ export async function getStaticProps() {
   return {
     props: {
       data,
-    }, // will be passed to the page component as props
+    },
   }
 }
