@@ -53,10 +53,4 @@ export default async function productHandler(req, res) {
       res.status(400).json({ success: false })
       break
   }
-
-  // if (product.length > 0) {
-  //   res.status(200).json(product[0])
-  // } else {
-  //   res.status(404).json({ message: `Product with id: ${id} not found.` })
-  // }
 }

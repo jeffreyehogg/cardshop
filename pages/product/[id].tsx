@@ -15,7 +15,7 @@ const ProductPage = ({ product }) => {
   // const [qty, setQty] = useState(1);
 
   return (
-    <>
+    <div key={product._id}>
       <Link href='/'>
         <a className='btn btn-light my-3'>Go Back</a>
       </Link>
@@ -74,24 +74,9 @@ const ProductPage = ({ product }) => {
         </Col>
       </Row>
       )
-    </>
+    </div>
   )
 }
-
-// export async function getStaticPaths() {
-//   const res = await fetch(`http://localhost:3000/api/products`)
-//   const data = await res.json()
-//   const paths = data.map((p) => ({
-//     params: {
-//       id: p._id,
-//     },
-//   }))
-
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
 
 export async function getServerSideProps({ params: { id } }) {
   await dbConnect()
