@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+import dbConnect from '../utils/dbConnect'
+import ProductSchema from '../models/Product'
 import { Row, Col } from 'react-bootstrap'
 import Layout from '../components/Layout'
 import Product from '../components/Product'
 
-export default function Home({ data }) {
-  const [products, setProducts] = useState(data)
+export default function Home({ products }) {
+  // const [products, setProducts] = useState(products)
 
   return (
     <Layout title='CardShop'>
@@ -20,12 +22,19 @@ export default function Home({ data }) {
   )
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`http://localhost:3000/api/products`)
-  const data = await res.json()
+export async function getServerSideProps() {
+  await dbConnect()
+
+  const result = await ProductSchema.find({})
+  const products = result.map((doc) => {
+    const product = doc.toObject()
+    product._id = product._id.toString()
+    return product
+  })
+
   return {
     props: {
-      data,
+      products: products,
     },
   }
 }

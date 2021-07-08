@@ -1,35 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
+import dbConnect from '../../utils/dbConnect'
+import Product from '../../models/Product'
 import Link from 'next/link'
 import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import Rating from '../../components/Rating'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
-// import { listProductDetails } from '../../actions/productActions';
 
 const ProductPage = ({ product }) => {
   // const [products, setProducts] = useState(data)
 
-  const router = useRouter()
-  const { id } = router.query
-  // const product = data.filter((p) => p._id === router.query.id)[0]
-
   // const [product, setProduct] = useState([])
 
   // const [qty, setQty] = useState(1);
-  // const dispatch = useDispatch();
-  // const productDetails = useSelector(state => state.productDetails);
-  // const { loading, error, product } = productDetails;
 
-  // useEffect(() => {
-  //   dispatch(listProductDetails(id));
-  // }, [dispatch, match]);
-
-  // const addToCartHandler = e => {
-  //   e.preventDefault();
-  //   router.push(`/cart/${id}?qty=${qty}`);
-  // };
   return (
     <>
       <Link href='/'>
@@ -94,11 +78,27 @@ const ProductPage = ({ product }) => {
   )
 }
 
-export default ProductPage
+// export async function getStaticPaths() {
+//   const res = await fetch(`http://localhost:3000/api/products`)
+//   const data = await res.json()
+//   const paths = data.map((p) => ({
+//     params: {
+//       id: p._id,
+//     },
+//   }))
 
-export async function getStaticProps({ params: { id } }) {
-  const res = await fetch(`http://localhost:3000/api/products/${id}`)
-  const product = await res.json()
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// }
+
+export async function getServerSideProps({ params: { id } }) {
+  await dbConnect()
+
+  const product = await Product.findById(id).lean()
+  product._id = product._id.toString()
+
   return {
     props: {
       product,
@@ -106,17 +106,4 @@ export async function getStaticProps({ params: { id } }) {
   }
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(`http://localhost:3000/api/products`)
-  const data = await res.json()
-  const paths = data.map((p) => ({
-    params: {
-      id: p._id,
-    },
-  }))
-
-  return {
-    paths,
-    fallback: false,
-  }
-}
+export default ProductPage
