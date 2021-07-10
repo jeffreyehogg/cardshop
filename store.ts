@@ -6,11 +6,25 @@ import {
   productListReducer,
   productDetailsReducer,
 } from './reducers/productReducers'
+import { cartReducer } from './reducers/cartReducers'
 
 const reducers = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  cart: cartReducer,
 })
+
+// const cartItemsFromStorage = localStorage.getItem('cartItems')
+//   ? JSON.parse(localStorage.getItem('cartItems'))
+//   : []
+
+const cartItemsFromStorage = []
+
+const initialState = {
+  cart: {
+    cartItems: cartItemsFromStorage,
+  },
+}
 
 let store
 
@@ -18,6 +32,7 @@ const middlewares = [thunkMiddleware]
 
 store = createStore(
   reducers,
+  initialState,
   composeWithDevTools(applyMiddleware(...middlewares))
 )
 
@@ -31,7 +46,7 @@ function initStore(initialState) {
   )
 }
 
-export const initializeStore = (preloadedState) => {
+export const initializeStore = preloadedState => {
   let _store = store ?? initStore(preloadedState)
 
   // After navigating to a page with an initial Redux state, merge that state
