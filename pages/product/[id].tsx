@@ -7,6 +7,7 @@ import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import Rating from '../../components/Rating'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
+import Layout from '../../components/Layout'
 
 const ProductPage = () => {
   const dispatch = useDispatch()
@@ -23,14 +24,14 @@ const ProductPage = () => {
   }, [dispatch, id])
 
   return (
-    <>
-      <Link href='/'>
-        <a className='btn btn-light my-3'>Go Back</a>
+    <Layout title={product.name}>
+      <Link href="/">
+        <a className="btn btn-light my-3">Go Back</a>
       </Link>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <>
           <h1>{product.name}</h1>
@@ -39,7 +40,7 @@ const ProductPage = () => {
               <Image src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={3}>
-              <ListGroup variant='flush'>
+              <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
@@ -47,7 +48,6 @@ const ProductPage = () => {
                   <Rating
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
-                    color='#f8e825'
                   />
                 </ListGroup.Item>
                 <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
@@ -58,7 +58,7 @@ const ProductPage = () => {
             </Col>
             <Col md={3}>
               <Card>
-                <ListGroup variant='flush'>
+                <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
                       <Col>Price</Col>
@@ -78,9 +78,9 @@ const ProductPage = () => {
 
                   <ListGroup.Item>
                     <Button
-                      className='btn'
+                      className="btn"
                       disabled={product.countInStock === 0}
-                      type='button'
+                      type="button"
                     >
                       Add to cart
                     </Button>
@@ -92,7 +92,7 @@ const ProductPage = () => {
         </>
       )}
       )
-    </>
+    </Layout>
   )
 }
 
