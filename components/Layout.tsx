@@ -18,11 +18,11 @@ const Layout = ({ children, title = 'CardShop' }: Props) => (
       <meta property="og:title" content={title} />
       <meta property="og:description" content="Buy the hottest sports cards!" />
       <meta property="og:type" content="website" />
-      {/* <meta property="og:url" content="https://" /> */}
-      {/* <meta
+      <meta property="og:url" content="https://cardshop.vercel.app/" />
+      <meta
         property="og:image"
-        content="https://jeffehogg.com/images/homepage.png"
-      /> */}
+        content="https://cardshop.vercel.app/images/cardshop.png"
+      />
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
