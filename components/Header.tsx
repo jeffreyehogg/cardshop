@@ -1,11 +1,17 @@
-import React from 'react';
-import { Navbar, Nav, Container, Row } from 'react-bootstrap';
-import Link from 'next/link';
+import React from 'react'
+import { Navbar, Nav, Container } from 'react-bootstrap'
+import Link from 'next/link'
 
 const Header = () => {
   return (
     <header>
-      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar
+        bg="primary"
+        variant="dark"
+        expand="lg"
+        collapseOnSelect
+        animation="false"
+      >
         <Container>
           <Link href="/">
             <a>
@@ -13,7 +19,7 @@ const Header = () => {
             </a>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" animation="false">
             <Nav className="mr-auto">
               <Link href="/cart" passHref>
                 <Nav.Link>
@@ -30,7 +36,7 @@ const Header = () => {
         </Container>
       </Navbar>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
