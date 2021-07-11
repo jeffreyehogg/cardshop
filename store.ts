@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 import {
   productListReducer,
   productDetailsReducer,
@@ -14,33 +16,21 @@ const reducers = combineReducers({
   cart: cartReducer,
 })
 
-// const cartItemsFromStorage = localStorage.getItem('cartItems')
-//   ? JSON.parse(localStorage.getItem('cartItems'))
-//   : []
-
-const cartItemsFromStorage = []
-
-const initialState = {
-  cart: {
-    cartItems: cartItemsFromStorage,
-  },
-}
-
 let store
 
 const middlewares = [thunkMiddleware]
 
-store = createStore(
-  reducers,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middlewares))
-)
+const persistConfig = {
+  key: 'primary',
+  storage,
+  whitelist: ['cart'], // place to select which state you want to persist
+}
 
-export default store
+const persistedReducer = persistReducer(persistConfig, reducers)
 
 function initStore(initialState) {
   return createStore(
-    reducers,
+    persistedReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   )

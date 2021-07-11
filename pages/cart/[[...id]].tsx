@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Form, Button, Card } from 'react-bootstrap'
 import Message from '../../components/Message'
-import { addToCart } from '../../actions/cartActions'
+import { addToCart, removeFromCart } from '../../actions/cartActions'
 import Layout from '../../components/Layout'
 
 const Cart = () => {
@@ -13,10 +13,7 @@ const Cart = () => {
   const {
     query: { id, qty },
   } = router
-  console.log(router.query)
-
   const dispatch = useDispatch()
-
   const cart = useSelector((state: any) => state.cart)
   const { cartItems } = cart
 
@@ -27,7 +24,7 @@ const Cart = () => {
   }, [dispatch, id, qty])
 
   const removeFromCartHandler = id => {
-    // dispatch(removeFromCart(id))
+    dispatch(removeFromCart(id))
   }
 
   const checkoutHandler = () => {
