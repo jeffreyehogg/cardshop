@@ -5,13 +5,7 @@ import Link from 'next/link'
 const Header = () => {
   return (
     <header>
-      <Navbar
-        bg="primary"
-        variant="dark"
-        expand="lg"
-        collapseOnSelect
-        animation="false"
-      >
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <Link href="/">
             <a>
@@ -19,7 +13,7 @@ const Header = () => {
             </a>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" animation="false">
+          <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Link href="/cart" passHref>
                 <Nav.Link>
