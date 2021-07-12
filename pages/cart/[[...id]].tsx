@@ -21,27 +21,32 @@ const Cart = () => {
     if (id) {
       dispatch(addToCart(id, qty))
     }
+    router.push('/cart')
   }, [dispatch, id, qty])
 
-  const removeFromCartHandler = id => {
+  const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
+    router.push('/cart')
   }
 
   const checkoutHandler = () => {
     router.push('/login?redirect=shipping')
   }
+
+  const numItems = cartItems.reduce((acc, item) => acc + parseInt(item.qty), 0)
+
   return (
-    <Layout title="Cart">
+    <Layout title='Cart'>
       <Row>
         <Col md={8}>
           <h1>Shopping Cart</h1>
           {cartItems.length === 0 ? (
-            <Message variant="info">
-              Shopping cart is empty<Link href="/">Go Back</Link>
+            <Message variant='info'>
+              Shopping cart is empty<Link href='/'>Go Back</Link>
             </Message>
           ) : (
-            <ListGroup variant="flush">
-              {cartItems.map(item => (
+            <ListGroup variant='flush'>
+              {cartItems.map((item) => (
                 <ListGroup.Item key={item.product}>
                   <Row>
                     <Col md={2}>
@@ -60,15 +65,15 @@ const Cart = () => {
                     <Col md={2}>${item.price}</Col>
                     <Col md={3}>
                       <Form.Control
-                        as="select"
+                        as='select'
                         value={item.qty}
-                        onChange={e =>
+                        onChange={(e) =>
                           dispatch(
                             addToCart(item.product, parseInt(e.target.value))
                           )
                         }
                       >
-                        {[...Array(item.countInStock).keys()].map(x => (
+                        {[...Array(item.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
                           </option>
@@ -77,11 +82,11 @@ const Cart = () => {
                     </Col>
                     <Col md={1}>
                       <Button
-                        type="button"
-                        variant="light"
+                        type='button'
+                        variant='light'
                         onClick={() => removeFromCartHandler(item.product)}
                       >
-                        <i className="fas fa-trash"></i>
+                        <i className='fas fa-trash'></i>
                       </Button>
                     </Col>
                   </Row>
@@ -92,12 +97,10 @@ const Cart = () => {
         </Col>
         <Col md={4}>
           <Card>
-            <ListGroup variant="flush">
+            <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h2>
-                  Subtotal{' '}
-                  {cartItems.reduce((acc, item) => acc + parseInt(item.qty), 0)}{' '}
-                  items
+                  Subtotal {numItems} {numItems === 1 ? 'item' : 'items'}
                 </h2>
                 $
                 {cartItems
@@ -109,8 +112,8 @@ const Cart = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
-                  type="button"
-                  className="btn-block"
+                  type='button'
+                  className='btn-block'
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >

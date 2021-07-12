@@ -34,13 +34,13 @@ const ProductPage = () => {
 
   return (
     <Layout title={product.name}>
-      <Link href="/">
-        <a className="btn btn-light my-3">Go Back</a>
+      <Link href='/'>
+        <a className='btn btn-light my-3'>Go Back</a>
       </Link>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant='danger'>{error}</Message>
       ) : (
         <>
           <h1>{product.name}</h1>
@@ -49,7 +49,7 @@ const ProductPage = () => {
               <Image src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={3}>
-              <ListGroup variant="flush">
+              <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
@@ -67,7 +67,7 @@ const ProductPage = () => {
             </Col>
             <Col md={3}>
               <Card>
-                <ListGroup variant="flush">
+                <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
                       <Col>Price</Col>
@@ -91,15 +91,17 @@ const ProductPage = () => {
                         <Col>Quantity:</Col>
                         <Col>
                           <Form.Control
-                            as="select"
+                            as='select'
                             value={qty}
-                            onChange={e => setQty(parseInt(e.target.value))}
+                            onChange={(e) => setQty(parseInt(e.target.value))}
                           >
-                            {[...Array(product.countInStock).keys()].map(x => (
-                              <option key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </option>
-                            ))}
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
                             ))
                           </Form.Control>
                         </Col>
@@ -110,9 +112,9 @@ const ProductPage = () => {
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
-                      className="btn"
+                      className='btn'
                       disabled={product.countInStock === 0}
-                      type="button"
+                      type='button'
                     >
                       Add to cart
                     </Button>
