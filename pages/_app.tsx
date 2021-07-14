@@ -1,3 +1,4 @@
+import { UserProvider } from '@auth0/nextjs-auth0'
 import { Provider } from 'react-redux'
 import { useStore } from '../store'
 import { persistStore } from 'redux-persist'
@@ -14,18 +15,20 @@ function MyApp({ Component, pageProps }) {
   })
 
   return (
-    <Provider store={store}>
-      <PersistGate
-        loading={
-          <Layout>
-            <Loader />
-          </Layout>
-        }
-        persistor={persistor}
-      >
-        <Component {...pageProps} />
-      </PersistGate>
-    </Provider>
+    <UserProvider>
+      <Provider store={store}>
+        <PersistGate
+          loading={
+            <Layout>
+              <Loader />
+            </Layout>
+          }
+          persistor={persistor}
+        >
+          <Component {...pageProps} />
+        </PersistGate>
+      </Provider>
+    </UserProvider>
   )
 }
 
