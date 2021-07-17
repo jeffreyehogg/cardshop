@@ -27,6 +27,10 @@ h3 {
   padding: 1rem 0;
 }
 
+i {
+  margin-right: 0.3rem;
+}
+
 * {
   box-sizing: border-box;
 }
