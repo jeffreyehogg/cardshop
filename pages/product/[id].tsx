@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/dist/client/router'
+import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { listProductDetails } from '../../actions/productActions'

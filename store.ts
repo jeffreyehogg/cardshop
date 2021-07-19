@@ -9,11 +9,13 @@ import {
   productDetailsReducer,
 } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
+import { orderCreateReducer } from './reducers/orderReducers'
 
 const reducers = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   cart: cartReducer,
+  orderCreate: orderCreateReducer,
 })
 
 let store
@@ -36,7 +38,7 @@ function initStore(initialState) {
   )
 }
 
-export const initializeStore = preloadedState => {
+export const initializeStore = (preloadedState) => {
   let _store = store ?? initStore(preloadedState)
 
   // After navigating to a page with an initial Redux state, merge that state

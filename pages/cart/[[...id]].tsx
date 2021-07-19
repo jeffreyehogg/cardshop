@@ -30,7 +30,7 @@ const Cart = () => {
   }
 
   const checkoutHandler = () => {
-    router.push('/login?redirect=shipping')
+    router.push('/shipping')
   }
 
   const numItems = cartItems.reduce((acc, item) => acc + parseInt(item.qty), 0)
