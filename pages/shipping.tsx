@@ -12,10 +12,10 @@ export default withPageAuthRequired(function Shipping() {
   const cart = useSelector((state: any) => state.cart)
   const { shippingAddress } = cart
 
-  const [address, setAddress] = useState(shippingAddress.address)
-  const [city, setCity] = useState(shippingAddress.city)
-  const [zip, setZip] = useState(shippingAddress.zip)
-  const [country, setCountry] = useState(shippingAddress.country)
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [zip, setZip] = useState('')
+  const [country, setCountry] = useState('')
   const router = useRouter()
   const dispatch = useDispatch()
 

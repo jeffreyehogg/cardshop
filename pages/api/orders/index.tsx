@@ -1,8 +1,10 @@
 import dbConnect from '../../../utils/dbConnect'
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0'
 import Order from '../../../models/Order'
 
-export default async function orderHandler(req, res) {
+export default withApiAuthRequired(async function orderHandler(req, res) {
   await dbConnect()
+  const session = getSession(req, res)
 
   const {
     orderItems,
@@ -31,4 +33,4 @@ export default async function orderHandler(req, res) {
 
     res.status(201).json(createOrder)
   }
-}
+})

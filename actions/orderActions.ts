@@ -1,4 +1,3 @@
-import { withApiAuthRequired, getAccessToken } from '@auth0/nextjs-auth0'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 import {
   ORDER_CREATE_REQUEST,
@@ -21,12 +20,8 @@ import {
   ORDER_DELIVER_REQUEST,
 } from '../constants/orderConstants'
 
-export const createOrder = (req, order) => async (dispatch, getState) => {
+export const createOrder = (order) => async (dispatch, getState) => {
   try {
-    const { accessToken } = await getAccessToken(req, order, {
-      scopes: ['read:shows'],
-    })
-
     dispatch({
       type: ORDER_CREATE_REQUEST,
     })
@@ -35,9 +30,8 @@ export const createOrder = (req, order) => async (dispatch, getState) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(order),
     })
 
     const data = await response.json()
